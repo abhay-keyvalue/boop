@@ -10,4 +10,10 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'red'
   },
+  searchContainer :{
+    zIndex: 1,
+    flex: 0.5,
+    marginHorizontal: 10,
+    marginVertical: 5,
+  }
 });

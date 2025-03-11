@@ -7,7 +7,7 @@ import GoogleMaps
 @main
 class AppDelegate: RCTAppDelegate {
   override func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    GMSServices.provideAPIKey("AIzaSyD9Dhj9wAb6azkDtQqBZq4g3kclt8HvmS0")
+    GMSServices.provideAPIKey("AIzaSyCqxOoNrZ8Mk7kQSjFEy83YDhH0xvCCxko")
     self.moduleName = "boop"
     self.dependencyProvider = RCTAppDependencyProvider()
     self.initialProps = [:]
