@@ -41,7 +41,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-around',
     width: '70%',
     height: 60,
-    backgroundColor: 'grey',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
     borderRadius: 30,
     paddingHorizontal: 20,
   },

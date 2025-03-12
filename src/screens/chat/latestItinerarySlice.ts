@@ -1,25 +1,6 @@
 import type {PayloadAction} from '@reduxjs/toolkit';
 import {createSlice} from '@reduxjs/toolkit';
-
-interface Location {
-  name: string;
-  latitude: number;
-  longitude: number;
-}
-
-interface Stop {
-  location: Location;
-  duration: string;
-}
-
-interface Itinerary {
-  tripName: string;
-  startLocation: Location;
-  endLocation: Location;
-  stops: Stop[];
-}
-
-
+import { Itinerary } from '../../types';
 
 const initialState: any = {
   itinerary: null,
