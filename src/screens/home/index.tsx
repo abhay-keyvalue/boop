@@ -16,7 +16,7 @@ export default function Home(): JSX.Element {
     <View style={styles.container}>
       {/* Centered Card */}
       <View style={styles.card}>
-        <Image source={{ uri: 'https://via.placeholder.com/300' }} style={styles.image} />
+        <Image source={require('../../assets/png/boopSq.png')} style={styles.image} />
         <Text style={styles.description}>
           I’m Boop, your local friend for exploring the world.
         </Text>
@@ -24,7 +24,7 @@ export default function Home(): JSX.Element {
       </View>
 
       {/* Bottom Action Bar */}
-      <BlurView style={styles.bottomBar} blurType="dark" blurAmount={20}>
+      <View style={styles.bottomBar}>
         <TouchableOpacity style={styles.button}>
           <Text>Keyboard</Text>
         </TouchableOpacity>
@@ -34,7 +34,7 @@ export default function Home(): JSX.Element {
         <TouchableOpacity style={styles.button}>
         <Text>Mic</Text>
         </TouchableOpacity>
-      </BlurView>
+      </View>
     </View>
   );
 }

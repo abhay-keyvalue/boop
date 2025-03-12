@@ -19,7 +19,7 @@ export default function Login(): JSX.Element {
 
   return (
     <View style={styles.container}>
-      <Image source={{ uri: 'https://via.placeholder.com/150' }} style={styles.avatar} />
+      <Image source={require('../../assets/png/boopCi.png')} style={styles.avatar} />
       <Text style={styles.welcomeText}>Welcome!</Text>
       <Text style={styles.label}>Email</Text>
       <TextInput

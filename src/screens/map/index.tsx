@@ -15,36 +15,43 @@ const locationDelta = {
 const sampleLocations = [
   {
     id: 1,
-    title: 'Venice',
+    title: 'Kakkanad',
     description: 'Starting point',
-    latitude: 45.4385,
-    longitude: 12.3358,
+    latitude: 10.0159,
+    longitude: 76.3419,
   },
   {
     id: 2,
-    title: 'Vicenza',
-    description: 'Destination',
-    latitude: 45.5462,
-    longitude: 11.5414,
+    title: 'Munnar',
+    description: 'Tea gardens',
+    latitude: 10.0889,
+    longitude: 77.0595,
   },
   {
     id: 3,
-    title: 'Padua',
-    description: 'Main public square of Venice',
-    latitude: 45.4105,
-    longitude: 11.8782,
+    title: 'Dhanushkodi',
+    description: 'Road to nowhere',
+    latitude: 9.1784,
+    longitude: 79.4166,
   },
   {
     id: 4,
-    title: 'Treviso',
-    description: 'Main public square of Venice',
-    latitude: 45.6669,
-    longitude: 12.2431,
+    title: 'Chennai',
+    description: 'Main city of Tamil Nadu',
+    latitude: 13.0843,
+    longitude: 80.2705,
+  },
+  {
+    id: 5,
+    title: 'Bangalore',
+    description: 'Silicon Valley of India',
+    latitude: 12.9716,
+    longitude: 77.5946,
   },
 ];
 
 const MapScreen = () => {
-  const mapRef: any = useRef(null);
+  const mapRef = useRef<MapView | null>(null);
   const [mapReady, setMapReady] = useState(false);
   const [directionsKey, setDirectionsKey] = useState(0);
 
@@ -57,6 +64,7 @@ const MapScreen = () => {
   return (
     <View style={styles.container}>
       <MapView
+        key={directionsKey}
         ref={mapRef}
         style={styles.map}
         provider={PROVIDER_GOOGLE}
@@ -72,7 +80,7 @@ const MapScreen = () => {
           setMapReady(true);
         }} // Set mapReady to true when map is loaded
       >
-        {sampleLocations.map(location => (
+        {sampleLocations.slice(1, sampleLocations?.length).map(location => (
           <Marker
             key={location.id}
             coordinate={{
@@ -86,46 +94,61 @@ const MapScreen = () => {
 
         {/* Render Directions Only When Map is Ready */}
         {mapReady && (
-          <MapViewDirections
-            key={directionsKey}
-            origin={{
-              latitude: sampleLocations[0].latitude,
-              longitude: sampleLocations[0].longitude,
-            }}
-            destination={{
-              latitude: sampleLocations[sampleLocations.length - 1].latitude,
-              longitude: sampleLocations[sampleLocations.length - 1].longitude,
-            }}
-            waypoints={sampleLocations.slice(1, -1).map(loc => ({
-              latitude: loc.latitude,
-              longitude: loc.longitude,
-            }))}
-            apikey={GOOGLE_PLACES_API_KEY}
-            strokeWidth={6}
-            strokeColor="blue"
-            precision="high"
-            mode="DRIVING"
-            onReady={result => {
-              console.log('Route distance:', result.distance, 'km');
-              console.log('Estimated duration:', result.duration, 'minutes');
+          <>
+            <MapViewDirections
+              key={directionsKey}
+              origin={{
+                latitude: sampleLocations[0].latitude,
+                longitude: sampleLocations[0].longitude,
+              }}
+              destination={{
+                latitude: sampleLocations[sampleLocations.length - 1].latitude,
+                longitude:
+                  sampleLocations[sampleLocations.length - 1].longitude,
+              }}
+              waypoints={sampleLocations.slice(1, -1).map(loc => ({
+                latitude: loc.latitude,
+                longitude: loc.longitude,
+              }))}
+              apikey={GOOGLE_PLACES_API_KEY}
+              strokeWidth={6}
+              strokeColor="blue"
+              precision="high"
+              mode="DRIVING"
+              onReady={result => {
+                console.log('Route distance:', result.distance, 'km');
+                console.log('Estimated duration:', result.duration, 'minutes');
 
-              if (result.coordinates.length > 0) {
-                console.log('Fit to coordinates:', result.coordinates);
-                mapRef.current?.fitToCoordinates(result.coordinates, {
-                  edgePadding: {top: 50, right: 50, bottom: 50, left: 50},
-                  animated: true,
-                });
+                if (result.coordinates.length > 0) {
+                  console.log('Fit to coordinates:', result.coordinates);
+                  setTimeout(() => {
+                    if (mapRef.current) {
+                      mapRef.current.fitToCoordinates(result.coordinates, {
+                        edgePadding: {top: 50, right: 50, bottom: 50, left: 50},
+                        animated: true,
+                      });
+                    }
+                  }, 1000);
+                }
+              }}
+              onStart={params =>
+                console.log(
+                  `Started routing between "${params.origin}" and "${params.destination}"`,
+                )
               }
-            }}
-            onStart={params =>
-              console.log(
-                `Started routing between "${params.origin}" and "${params.destination}"`,
-              )
-            }
-            onError={errorMessage =>
-              console.log('Directions API Error:', errorMessage)
-            }
-          />
+              onError={errorMessage =>
+                console.log('Directions API Error:', errorMessage)
+              }
+            />
+            {/* <Polyline
+              coordinates={sampleLocations.map(loc => ({
+                latitude: loc.latitude,
+                longitude: loc.longitude,
+              }))}
+              strokeWidth={6}
+              strokeColor="red"
+            /> */}
+          </>
         )}
       </MapView>
     </View>

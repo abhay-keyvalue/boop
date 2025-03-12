@@ -3,13 +3,12 @@ import {StyleSheet} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import Home from '../screens/home';
+import MapScreen from '../screens/map';
 
 
 export type BottomTabParamList = {
   Home: undefined;
-  Arrests: {stage?: string};
-  Notifications: undefined;
-  Profile: undefined;
+  MapScreen: undefined;
 };
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
@@ -24,6 +23,7 @@ const BottomTabs = () => {
       })}
     >
       <Tab.Screen options={{headerShown: false}} name='Home' component={Home} />
+      <Tab.Screen options={{headerShown: false}} name='MapScreen' component={MapScreen} />
     </Tab.Navigator>
   );
 };
