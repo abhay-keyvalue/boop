@@ -8,7 +8,7 @@ function Init(): React.JSX.Element {
 
   const themeStyle = {
     container: {
-      backgroundColor: '#FFF'
+      backgroundColor: '#000'
     },
   };
 
@@ -25,11 +25,11 @@ function Init(): React.JSX.Element {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000'
+    backgroundColor: '#000',
   },
   bottom: {
-    flex: 0
-  }
+    flex: 0,
+  },
 });
 
 export default Init;

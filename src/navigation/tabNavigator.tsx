@@ -4,26 +4,34 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import Home from '../screens/home';
 import MapScreen from '../screens/map';
-
+import ChatScreen from '../screens/chat';
 
 export type BottomTabParamList = {
   Home: undefined;
-  MapScreen: undefined;
+  Map: undefined;
+  Chat: undefined;
 };
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 const BottomTabs = () => {
-
   return (
     <Tab.Navigator
       screenOptions={() => ({
         headerShown: false,
         tabBarStyle: styles.tabBar,
-      })}
-    >
-      <Tab.Screen options={{headerShown: false}} name='Home' component={Home} />
-      <Tab.Screen options={{headerShown: false}} name='MapScreen' component={MapScreen} />
+      })}>
+      <Tab.Screen options={{headerShown: false}} name="Home" component={Home} />
+      <Tab.Screen
+        options={{headerShown: false}}
+        name="Map"
+        component={MapScreen}
+      />
+      <Tab.Screen
+        options={{headerShown: false}}
+        name="Chat"
+        component={ChatScreen}
+      />
     </Tab.Navigator>
   );
 };
@@ -40,6 +48,7 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     paddingBottom: 10,
     borderWidth: 0,
+    backgroundColor: '#000',
   },
   iconContainer: {
     paddingTop: 5,
@@ -48,8 +57,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderTopWidth: 2,
-    borderTopColor: 'transparent'
-  }
+    borderTopColor: 'transparent',
+  },
 });
 
 export default BottomTabs;

@@ -1,7 +1,6 @@
 
 import React, { JSX } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import { BlurView } from '@react-native-community/blur';
 import { styles } from './style';
 import { navigateTo } from '../../navigation/navigationUtils';
 
@@ -9,7 +8,7 @@ export default function Home(): JSX.Element {
 
   const navigateToMapScreen = () => {
     console.log('Navigate to map screen');
-    navigateTo('MapScreen');
+    navigateTo('Map');
   };
 
   return (
