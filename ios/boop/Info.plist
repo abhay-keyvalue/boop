@@ -26,17 +26,16 @@
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-	  <!-- Do not change NSAllowsArbitraryLoads to true, or you will risk app rejection! -->
 		<key>NSAllowsArbitraryLoads</key>
 		<false/>
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Do you allow the app to get your location?</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Do you allow the app to get your location?</string>
 	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Do you allow the app to get your location?</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Do you allow the app to get your location?</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
