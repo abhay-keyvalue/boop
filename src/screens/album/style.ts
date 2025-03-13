@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
   },
   noAlbumsText: {
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: 16,
     marginTop: 20,
     color: '#fff',
   },

@@ -55,7 +55,7 @@ const AlbumScreen = () => {
                 source={{ uri: album[item][0]?.uri || '' }}
                 style={styles.albumImage}
               />
-              <Text style={styles.albumTitle}>{item}</Text>
+              <Text style={styles.albumTitle}>{item?.replace(/_/g, "/")}</Text>
             </TouchableOpacity>
           )}
         />

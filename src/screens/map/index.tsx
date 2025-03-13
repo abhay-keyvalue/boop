@@ -106,10 +106,12 @@ const MapScreen: React.FC<any> = () => {
                 mode="DRIVING"
                 onReady={result => {
                   if (result.coordinates.length > 0 && mapRef.current) {
-                    mapRef.current.fitToCoordinates(result.coordinates, {
-                      edgePadding: {top: 50, right: 50, bottom: 50, left: 50},
-                      animated: true,
-                    });
+                    setTimeout(() => {
+                      mapRef?.current?.fitToCoordinates(result.coordinates, {
+                        edgePadding: {top: 50, right: 50, bottom: 50, left: 50},
+                        animated: true,
+                      });
+                    }, 100);
                   }
                 }}
                 onError={errorMessage =>

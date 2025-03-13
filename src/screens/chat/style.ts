@@ -20,6 +20,7 @@ export const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     marginTop: 10,
     alignItems: 'flex-end',
+    marginBottom: 10,
   },
   input: {
     flex: 1,
@@ -124,6 +125,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#000',
     borderBottomWidth: 1,
     borderBottomColor: '#333',
+    marginBottom: 10,
   },
   header: {
     fontSize: 20,
@@ -164,4 +166,15 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  emptyChatContainer: {
+    flex: 1,
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  emptyChatText: {
+    color: '#fff',
+    fontSize: 16,
+    textAlign: 'center'
+  }
 });

@@ -6,6 +6,8 @@ import {
   Text,
   Image,
   TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {useDispatch, useSelector} from 'react-redux';
@@ -30,7 +32,7 @@ const ChatScreen: React.FC = () => {
   );
 
   const [input, setInput] = useState<string>(
-    'Hey Boop, I am planning an itinerary',
+    'Hey Boop, I am planning a trip',
   );
   const [loading, setLoading] = useState<boolean>(false);
   const [selectedImages, setSelectedImages] = useState<Media[]>([]);
@@ -74,7 +76,7 @@ const ChatScreen: React.FC = () => {
 
     if (input?.trim()?.length > 0) {
       setLoading(true);
-      const isTripPlanQuery = /trip plan|itinerary/i.test(input);
+      const isTripPlanQuery = /trip plan|itinerary|planning a trip/i.test(input);
       const aiReply = await askTogetherAI(input, isTripPlanQuery);
       let aiMessage: ChatMessage = {
         id: Date.now() + 1,
@@ -229,8 +231,20 @@ const ChatScreen: React.FC = () => {
     );
   };
 
+  const renderListEmptyComponent = () => {
+    return (
+      <View style={styles.emptyChatContainer}>
+        <Text style={styles.emptyChatText}>No messages yet</Text>
+      </View>
+    );
+  }
+
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 55 : 0}
+      >
       <View style={styles.headerContainer}>
         <Text style={styles.header}>Travel Assistant</Text>
         <TouchableOpacity style={styles.clear} onPress={clearChat}>
@@ -243,6 +257,7 @@ const ChatScreen: React.FC = () => {
           data={messages}
           keyExtractor={item => item.id.toString()}
           renderItem={({item}) => renderMessageBubble(item)}
+          ListEmptyComponent={renderListEmptyComponent}
         />
       </View>
 
@@ -272,7 +287,7 @@ const ChatScreen: React.FC = () => {
           <Send width={30} height={30} />
         </TouchableOpacity>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

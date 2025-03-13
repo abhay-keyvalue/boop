@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
   },
   header: {
     fontSize: 16,
-    fontWeight: 'medium',
+    fontWeight: 'bold',
     color: '#fff',
   }
 });
