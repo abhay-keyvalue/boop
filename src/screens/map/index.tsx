@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {Text, View} from 'react-native';
-import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
+import MapView, {PROVIDER_GOOGLE, Marker, Polyline} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import {styles} from './style';
 import {useSelector} from 'react-redux';
@@ -22,6 +22,10 @@ const MapScreen: React.FC<any> = () => {
 
   const {itinerary} = useSelector(
     (state: {latestItinerary: {itinerary: Itinerary}}) => state.latestItinerary,
+  );
+
+  const {currentLocation, routeCoordinates} = useSelector(
+    (state: any) => state.location,
   );
 
   const mapData = itinerary || {startLocation: null, stops: [], endLocation: null};
@@ -53,15 +57,15 @@ const MapScreen: React.FC<any> = () => {
     return (
       <View style={styles.container}>
         {renderHeader()}
-        {mapData.startLocation ? (
+        {mapData?.startLocation || routeCoordinates?.length > 0 ? (
           <MapView
             key={directionsKey}
             ref={mapRef}
             style={styles.map}
             provider={PROVIDER_GOOGLE}
             initialRegion={{
-              latitude: Number(mapData.startLocation?.latitude?.toFixed(4)),
-              longitude: Number(mapData.startLocation?.longitude?.toFixed(4)),
+              latitude: Number(currentLocation?.latitude?.toFixed(4)),
+              longitude: Number(currentLocation?.longitude?.toFixed(4)),
               ...locationDelta,
             }}
             zoomEnabled
@@ -119,6 +123,21 @@ const MapScreen: React.FC<any> = () => {
                 }
               />
             )}
+            {routeCoordinates.length > 1 && (
+              <Polyline
+                coordinates={routeCoordinates}
+                strokeWidth={4}
+                strokeColor="pink"
+              />
+            )}
+
+            {currentLocation && (
+              <Marker
+                coordinate={currentLocation}
+                title="Your Location"
+                pinColor="blue"
+              />
+            )}
           </MapView>
         ) :
         <Text style={styles.errorText}>No Itinerary data available</Text>
@@ -126,7 +145,6 @@ const MapScreen: React.FC<any> = () => {
       </View>
     );
   } catch (error) {
-    console.log('error while parsing', error);
     return (
       <View style={styles.container}>
         <Text style={styles.errorText}>Failed to render map</Text>
